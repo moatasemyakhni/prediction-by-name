@@ -8,3 +8,19 @@ const age = document.getElementById('age')
 const nationality = document.getElementById('nationality')
 const submitDogBtn = document.getElementById('dog-btn')
 let dogImage = document.getElementById('dog-image')
+
+
+async function agePredictionByName() {
+    const response = await fetch('https://api.agify.io/?name=' + inputName.value)
+    if(!response.ok) {
+        console.error("Bad response in agePredictionByName method")
+        return
+    }
+    const data = await response.json()
+    if(data.age == null) {
+        age.textContent = "Not Found"
+        return
+    }
+    age.textContent = data.age
+}
+
