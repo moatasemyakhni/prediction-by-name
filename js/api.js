@@ -9,6 +9,19 @@ const nationality = document.getElementById('nationality')
 const submitDogBtn = document.getElementById('dog-btn')
 let dogImage = document.getElementById('dog-image')
 
+async function genderPredictionByName() {
+    const response = await fetch('https://api.genderize.io?name=' + inputName.value)
+    if(!response.ok) {
+        console.error("Bad response in genderPredictionByName method. Status:", response.status)
+        return
+    }
+    const data = await response.json()
+    if(data.gender == null) {
+        gender.textContent = "Not Found"
+        return
+    }
+    gender.textContent = data.gender
+}
 
 async function agePredictionByName() {
     const response = await fetch('https://api.agify.io/?name=' + inputName.value)
