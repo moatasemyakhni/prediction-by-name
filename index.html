@@ -1,0 +1,103 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS API</title>
+    <link rel="stylesheet" href="styles/styles.css">
+    <script src="js/api.js" defer></script>
+</head>
+<body>
+    <nav class="navbar">
+        <h1 class="navbar-title">
+            Name: An Identity Marker
+        </h1>
+    </nav>
+
+    <section class="section section-hero">
+        <div class="intro-wrapper">
+            <p class="intro">Discover the following demographic features of your name:</p>
+            <div class="demographic-features-list">
+                <div class="demographic-features-item">
+                    <p>Gender</p>
+
+                    <div class="icon-wrapper">
+                        <img src="images/icons/gender.png" alt="Gender-icon">
+                    </div>
+
+                </div>
+
+                <div class="demographic-features-item">
+                    <p>Age</p>
+
+                    <div class="icon-wrapper">
+                        <img src="images/icons/age.png" alt="Age-icon">
+                    </div>
+                    
+                </div>
+
+                <div class="demographic-features-item">
+                    <p>Nationality</p>
+
+                    <div class="icon-wrapper">
+                        <img src="images/icons/nationality.png" alt="Nationality-icon">
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="intro-img">
+            <img src="images/earth.png" alt="Earth">
+        </div>
+
+        <div class="form">
+            <input type="text" class="btn btn-white" name="name" id="name" placeholder="Enter Name...">
+            <button class="btn btn-white btn-submit" type="submit" id="name-btn">Submit</button>
+        </div>
+
+    </section>
+
+    <!-- The below 3 sections will be invisible until the user submits the name -->
+    <section class="section section-error view-none" id="error-section">
+        <p class="error-msg" id="error-msg-content"></p>
+    </section>
+
+    <!-- sections-to-view is for js purposes -->
+    <section class="section section-answers view-none sections-to-view">
+        <table class="answers-table">
+            <tr>
+                <th class="answers-title" colspan="3">The Answer is: 🥁</th>
+            </tr>
+
+            <tr>
+                <th>Gender</th>
+                <th>Age</th>
+                <th>Nationality Code</th>
+            </tr>
+
+            <tr>
+                <th id="gender"></th>
+                <th id="age"></th>
+                <th>
+                    <ul class="nationality-items" id="nationality">
+                        <!-- js will add the items later -->
+                    </ul>
+                </th>
+            </tr>
+
+        </table>
+    </section>
+
+    <section class="section dog-section view-none sections-to-view">
+        <button class="btn btn-white btn-submit" id="dog-btn">
+            Freshen your mood:)
+        </button>
+        <div class="img-wrapper">
+            <!-- src will be added later in the js -->
+            <img alt="Dog Photo" class="dog-img view-hidden" id="dog-image">
+        </div>
+        
+    </section>
+</body>
+</html>
