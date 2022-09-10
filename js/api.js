@@ -57,3 +57,12 @@ async function nationalityPredictionByName() {
     })
 }
 
+async function randomDogImage() {
+    const response = await fetch('https://dog.ceo/api/breeds/image/random')
+    if(!response.ok) {
+        console.error("Bad response in randomDogImage method. Status:", response.status)
+        return
+    }
+    const data = await response.json()
+    dogImage.src = data.message
+}
