@@ -41,6 +41,13 @@ submitNameBtn.addEventListener('click', () => {
     })
 })
 
+submitDogBtn.addEventListener('click', () => {
+    if(dogImage.classList.contains('view-hidden')) {
+        dogImage.classList.remove('view-hidden')
+    }
+    randomDogImage()
+})
+
 async function genderPredictionByName() {
     const response = await fetch('https://api.genderize.io?name=' + inputName.value)
     if(!response.ok) {
