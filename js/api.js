@@ -18,6 +18,29 @@ inputName.addEventListener('input', () => {
     }
 })
 
+submitNameBtn.addEventListener('click', () => {
+    clear() // old info should be cleared
+    // handle empty field
+    if(!inputName.value) {
+        errorMessage.textContent = "Empty Field"
+        displayErrorMessage.classList.remove('view-none')
+        hiddenSections.forEach((sec) => {
+            if(!sec.classList.contains('view-none')) {
+                sec.classList.add('view-none')
+            }
+        })
+        return
+    }
+
+    genderPredictionByName()
+    agePredictionByName()
+    nationalityPredictionByName()
+
+    hiddenSections.forEach((sec) => {
+        sec.classList.remove('view-none')
+    })
+})
+
 async function genderPredictionByName() {
     const response = await fetch('https://api.genderize.io?name=' + inputName.value)
     if(!response.ok) {
