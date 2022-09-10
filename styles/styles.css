@@ -135,5 +135,19 @@ body {
         'form';
     }
     
+    .intro-wrapper {
+        justify-content: center;
+    }
+
+    .demographic-features-list {
+        flex-direction: row;
+        font-size: 14px;
+        gap: 10px;
+    }
+
+    .demographic-features-item {
+        gap: 5px;
+    }
+
     
 }
