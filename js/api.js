@@ -103,6 +103,10 @@ async function randomDogImage() {
         return
     }
     const data = await response.json()
+    let dogPhoto = document.createElement('img')
+    
+    dogPhoto.setAttribute('class', 'dog-img')
+    dogPhoto.setAttribute('src')
     dogImage.src = data.message
 }
 
