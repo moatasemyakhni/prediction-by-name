@@ -113,3 +113,13 @@ body {
 .answers-table tr th .nationality-items li {
     padding-bottom: 10px;
 }
+
+/* section of the dog image */
+.dog-section {
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    height: 200px;
+    justify-content: center;
+    gap: 30px;
+}
