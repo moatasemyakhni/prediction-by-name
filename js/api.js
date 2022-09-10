@@ -66,3 +66,14 @@ async function randomDogImage() {
     const data = await response.json()
     dogImage.src = data.message
 }
+
+function clear() {
+    gender.textContent = null
+    age.textContent = null
+    if(!dogImage.classList.contains('view-hidden')) {
+        dogImage.classList.add('view-hidden')
+    }
+    while(nationality.firstChild) {
+        nationality.removeChild(nationality.firstChild)
+    }
+}
