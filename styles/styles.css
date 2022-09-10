@@ -75,4 +75,15 @@ body {
     align-items: center;
 }
 /* inside intro wrapper] */
+.section-hero .intro-img {
+    grid-area: img;
+}
+
+.section-hero .form {
+    grid-area: form;
+    padding-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
 /* end section hero */
