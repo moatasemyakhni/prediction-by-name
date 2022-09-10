@@ -102,3 +102,14 @@ body {
     border-radius: 20px;
 }
 /* end error section */
+
+/* section of results */
+.section-answers .answers-table {
+    width: 100%;
+    /* spacing vertically */
+    border-spacing: 0 20px;
+}
+
+.answers-table tr th .nationality-items li {
+    padding-bottom: 10px;
+}
