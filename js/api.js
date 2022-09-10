@@ -9,6 +9,15 @@ const nationality = document.getElementById('nationality')
 const submitDogBtn = document.getElementById('dog-btn')
 let dogImage = document.getElementById('dog-image')
 
+
+inputName.addEventListener('input', () => {
+    // if there was previous error
+    //it should be cleared when we type new things
+    if(displayErrorMessage.classList.contains('view-none')) {
+        displayErrorMessage.classList.add('view-none')
+    }
+})
+
 async function genderPredictionByName() {
     const response = await fetch('https://api.genderize.io?name=' + inputName.value)
     if(!response.ok) {
