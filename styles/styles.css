@@ -32,3 +32,25 @@ body {
     text-align: center;
 }
 /* end header */
+
+/* start section hero */
+.section-hero {
+    width: 90%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: 200px;
+    grid-template-areas: 
+    'introWrapper img'
+    'form img';
+}
+
+.intro-wrapper {
+    grid-area: introWrapper;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-weight: 700;
+    align-self: center;
+}
+/* end section hero */
