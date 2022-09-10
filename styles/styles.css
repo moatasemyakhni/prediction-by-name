@@ -87,3 +87,18 @@ body {
     gap: 10px;
 }
 /* end section hero */
+
+/* start error section */
+.section-error {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.error-msg {
+    padding: 10px;
+    color: #c52030;
+    background-color: rgba(255, 125, 138, 0.4);
+    font-size: 20px;
+    border-radius: 20px;
+}
+/* end error section */
