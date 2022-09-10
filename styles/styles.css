@@ -158,3 +158,17 @@ body {
     }
 
 }
+
+/* utilities */
+img {
+    height: 100%;
+    width: 100%;
+}
+
+.img-wrapper {
+    height: 200px;
+}
+
+.icon-wrapper {
+    height: 24px;
+}
