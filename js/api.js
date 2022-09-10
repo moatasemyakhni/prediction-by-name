@@ -89,11 +89,19 @@ async function nationalityPredictionByName() {
         nationality.appendChild(item)
         return
     }
-    data.country.forEach((countryId) => {
+    // data.country.forEach((countryId) => {
+    //     const item = document.createElement('li')
+    //     item.textContent = countryId['country_id']
+    //     nationality.appendChild(item)
+    // })
+    let counter = 0
+    for(const countryId of data.country) {
         const item = document.createElement('li')
         item.textContent = countryId['country_id']
         nationality.appendChild(item)
-    })
+        counter += 1
+        if(counter == 2) break
+    }
 }
 
 async function randomDogImage() {
