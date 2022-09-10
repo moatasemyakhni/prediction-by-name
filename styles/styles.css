@@ -172,3 +172,25 @@ img {
 .icon-wrapper {
     height: 24px;
 }
+
+.btn {
+    height: fit-content !important;
+    border: 1px solid #f1f1f1;
+    border-radius: 10px;
+    outline: none;
+}
+
+.btn-white {
+    background-color: var(--main-bg-color);
+    font-size: 24px;
+    padding: 8px;
+}
+
+.btn-submit {
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.btn-submit:hover {
+    opacity: 0.7;
+}
