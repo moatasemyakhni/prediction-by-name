@@ -53,4 +53,26 @@ body {
     font-weight: 700;
     align-self: center;
 }
+
+/* [ inside intro wrapper */
+.intro {
+    padding-top: 2px;
+}
+
+.demographic-features-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.demographic-features-item {
+    display: flex;
+    gap: 10px;
+}
+
+.demographic-features-item > p {
+    /* make text appears aligned to the center of the icons */
+    display: flex;
+    align-items: center;
+}
+/* inside intro wrapper] */
 /* end section hero */
