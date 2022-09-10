@@ -13,7 +13,7 @@ let dogImage = document.getElementById('dog-image')
 async function agePredictionByName() {
     const response = await fetch('https://api.agify.io/?name=' + inputName.value)
     if(!response.ok) {
-        console.error("Bad response in agePredictionByName method")
+        console.error("Bad response in agePredictionByName method. Status: ", response.status)
         return
     }
     const data = await response.json()
@@ -22,5 +22,25 @@ async function agePredictionByName() {
         return
     }
     age.textContent = data.age
+}
+
+async function nationalityPredictionByName() {
+    const response = await fetch('https://api.nationalize.io/?name=' + inputName.value)
+    if(!response.ok) {
+        console.error("Bad response in nationalityPredictionByName method. Status: ", response.status)
+        return
+    }
+    const data = await response.json()
+    if(data.country.length == 0) {
+        const item = document.createElement('li')
+        item.textContent = "Not Found"
+        nationality.appendChild(item)
+        return
+    }
+    data.country.forEach((countryId) => {
+        const item = document.createElement('li')
+        item.textContent = countryId['country_id']
+        nationality.appendChild(item)
+    })
 }
 
