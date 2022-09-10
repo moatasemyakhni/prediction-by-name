@@ -51,7 +51,7 @@ submitDogBtn.addEventListener('click', () => {
 async function genderPredictionByName() {
     const response = await fetch('https://api.genderize.io?name=' + inputName.value)
     if(!response.ok) {
-        console.error("Bad response in genderPredictionByName method. Status:", response.status)
+        console.error("Bad response in genderPredictionByName function. Status:", response.status)
         return
     }
     const data = await response.json()
@@ -65,7 +65,7 @@ async function genderPredictionByName() {
 async function agePredictionByName() {
     const response = await fetch('https://api.agify.io/?name=' + inputName.value)
     if(!response.ok) {
-        console.error("Bad response in agePredictionByName method. Status: ", response.status)
+        console.error("Bad response in agePredictionByName function. Status: ", response.status)
         return
     }
     const data = await response.json()
@@ -79,7 +79,7 @@ async function agePredictionByName() {
 async function nationalityPredictionByName() {
     const response = await fetch('https://api.nationalize.io/?name=' + inputName.value)
     if(!response.ok) {
-        console.error("Bad response in nationalityPredictionByName method. Status: ", response.status)
+        console.error("Bad response in nationalityPredictionByName function. Status: ", response.status)
         return
     }
     const data = await response.json()
@@ -99,7 +99,7 @@ async function nationalityPredictionByName() {
 async function randomDogImage() {
     const response = await fetch('https://dog.ceo/api/breeds/image/random')
     if(!response.ok) {
-        console.error("Bad response in randomDogImage method. Status:", response.status)
+        console.error("Bad response in randomDogImage function. Status:", response.status)
         return
     }
     const data = await response.json()
