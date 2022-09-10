@@ -149,5 +149,12 @@ body {
         gap: 5px;
     }
 
-    
+    .section-hero .form {
+        justify-content: center;
+    }
+
+    .dog-section {
+        flex-direction: column;
+    }
+
 }
