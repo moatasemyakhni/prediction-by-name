@@ -123,3 +123,17 @@ body {
     justify-content: center;
     gap: 30px;
 }
+
+/* media queries */
+@media only screen and (max-width: 600px) {
+    .section-hero {
+        grid-template-columns: 1fr;
+        grid-auto-rows: auto;
+        grid-template-areas: 
+        'introWrapper'
+        'img'
+        'form';
+    }
+    
+    
+}
