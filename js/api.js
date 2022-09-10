@@ -13,7 +13,7 @@ let dogImage = document.getElementById('dog-image')
 inputName.addEventListener('input', () => {
     // if there was previous error
     //it should be cleared when we type new things
-    if(displayErrorMessage.classList.contains('view-none')) {
+    if(!displayErrorMessage.classList.contains('view-none')) {
         displayErrorMessage.classList.add('view-none')
     }
 })
