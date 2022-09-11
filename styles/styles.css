@@ -22,7 +22,8 @@ body {
     background-color: var(--main-bg-color);
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    padding: 0 10px;
 }
 
 .navbar .navbar-title {
@@ -30,6 +31,10 @@ body {
     font-family: 'Gloria Hallelujah', Arial, Helvetica, sans-serif;
     text-transform: capitalize;
     text-align: center;
+}
+
+.login-submit-btns {
+
 }
 /* end header */
 
@@ -195,6 +200,13 @@ img {
     opacity: 0.7;
 }
 
+.btn-reverse {
+    background-color: #ccc;
+    color: var(--main-bg-color);
+    font-size: 24px;
+    padding: 8px;
+}
+
 .view-none {
     display: none;
 }
@@ -207,3 +219,27 @@ img {
     margin-bottom: 30px;
 }
 /* end utilities */
+
+/* new features styles */
+.window {
+    width: 100vw;
+	height: 100vh;
+
+	background-color: rgb(0, 0, 0, 0.8);
+	position: fixed;
+	top: 0;
+	left: 0;
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 100;
+}
+
+.forms {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    justify-content: center;
+    align-content: center;
+}

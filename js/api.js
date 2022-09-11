@@ -8,7 +8,91 @@ const age = document.getElementById('age')
 const nationality = document.getElementById('nationality')
 const submitDogBtn = document.getElementById('dog-btn')
 let dogImage = document.getElementById('dog-image')
+const loginBtn = document.getElementById('login-btn')
+const signupBtn = document.getElementById('signup-btn')
 
+
+loginBtn.addEventListener('click', () => {
+    console.log("HEllo")
+    let body = document.body
+    let div = document.createElement('div')
+    div.setAttribute('class', 'window')
+    let userInput = document.createElement('input')
+    userInput.setAttribute('type', 'text')
+    userInput.setAttribute('class', 'form-inputs btn btn-white')
+    userInput.setAttribute('id', 'login-name')
+    userInput.setAttribute('placeholder', 'Username...')
+    
+    let pwdInput = document.createElement('input')
+    pwdInput.setAttribute('type', 'password')
+    pwdInput.setAttribute('class', 'form-inputs btn btn-white')
+    pwdInput.setAttribute('id', 'login-pwd')
+    pwdInput.setAttribute('placeholder', 'Password...')
+    let loginFormBtn = document.createElement('button')
+    loginFormBtn.setAttribute('class', 'btn btn-white btn-submit')
+    loginFormBtn.setAttribute('id', 'login-form-btn')
+    loginFormBtn.textContent = 'Login'
+
+    let form = document.createElement('div')
+    let closeBtn = document.createElement('button')
+    closeBtn.setAttribute('class', 'btn btn-submit btn-white')
+    closeBtn.style.backgroundColor = 'rgb(200, 0, 0)'
+    closeBtn.style.color = "#f1f1f1"
+    closeBtn.textContent = "Close"
+
+    form.setAttribute('class', 'forms')
+    form.appendChild(userInput)
+    form.appendChild(pwdInput)
+    form.appendChild(loginFormBtn)
+    form.appendChild(closeBtn)
+
+    div.appendChild(form)
+    body.appendChild(div)
+    closeBtn.setAttribute("onclick", "closeWindow()");
+})
+
+signupBtn.addEventListener('click', () => {
+    console.log("HEllo")
+    let body = document.body
+    let div = document.createElement('div')
+    div.setAttribute('class', 'window')
+    let userInput = document.createElement('input')
+    userInput.setAttribute('type', 'text')
+    userInput.setAttribute('class', 'form-inputs btn btn-white')
+    userInput.setAttribute('id', 'login-name')
+    userInput.setAttribute('placeholder', 'Username...')
+    
+    let pwdInput = document.createElement('input')
+    pwdInput.setAttribute('type', 'password')
+    pwdInput.setAttribute('class', 'form-inputs btn btn-white')
+    pwdInput.setAttribute('id', 'login-pwd')
+    pwdInput.setAttribute('placeholder', 'Password...')
+    let signupFormBtn = document.createElement('button')
+    signupFormBtn.setAttribute('class', 'btn btn-white btn-submit')
+    signupFormBtn.setAttribute('id', 'login-form-btn')
+    signupFormBtn.textContent = 'Signup'
+
+    let form = document.createElement('div')
+    let closeBtn = document.createElement('button')
+    closeBtn.setAttribute('class', 'btn btn-submit btn-white')
+    closeBtn.style.backgroundColor = 'rgb(200, 0, 0)'
+    closeBtn.style.color = "#f1f1f1"
+    closeBtn.textContent = "Close"
+
+    form.setAttribute('class', 'forms')
+    form.appendChild(userInput)
+    form.appendChild(pwdInput)
+    form.appendChild(signupFormBtn)
+    form.appendChild(closeBtn)
+
+    div.appendChild(form)
+    body.appendChild(div)
+    closeBtn.setAttribute("onclick", "closeWindow()");
+})
+
+function closeWindow() {
+    document.querySelector('.window').remove()
+}
 
 inputName.addEventListener('input', () => {
     // if there was previous error
