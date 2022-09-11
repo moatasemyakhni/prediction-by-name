@@ -33,8 +33,8 @@ body {
     text-align: center;
 }
 
-.login-submit-btns {
-
+.ip-title {
+    font-size: 14px;
 }
 /* end header */
 
@@ -131,6 +131,19 @@ body {
 
 /* media queries */
 @media only screen and (max-width: 600px) {
+    .navbar {
+        height: 100px;
+    }
+    .navbar > div {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+
+    .navbar > div > button {
+        width: 80%;
+    }
+
     .section-hero {
         grid-template-columns: 1fr;
         grid-auto-rows: auto;

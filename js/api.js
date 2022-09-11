@@ -12,6 +12,7 @@ const loginBtn = document.getElementById('login-btn')
 const signupBtn = document.getElementById('signup-btn')
 const logoutBtn = document.getElementById('logout-btn')
 const usernameBtn = document.getElementById('username-btn')
+const navbarTitle = document.getElementById('navbar-title')
 
 loginBtn.addEventListener('click', () => {
     console.log("login")
@@ -301,6 +302,23 @@ async function randomDogImage() {
     dogPhoto.setAttribute('class', 'dog-img')
     dogPhoto.setAttribute('src', data.message)
 }
+
+const getUserIP = () => {
+    axios.get('https://api.ipify.org/?format=json')
+    .then(response => {
+     const users = response.data
+     const ip = users['ip']
+     const h4 = document.createElement('h4')
+     h4.setAttribute('id', 'ip')
+     h4.setAttribute('class', 'ip-title')
+     h4.textContent = ip
+     navbarTitle.appendChild(h4)
+     console.log(`GET users`, users)
+   })
+    .catch(error => console.error(error))
+   }
+   
+getUserIP()
 
 function clear() {
     gender.textContent = null
