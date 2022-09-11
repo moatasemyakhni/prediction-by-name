@@ -73,7 +73,7 @@ loginBtn.addEventListener('click', () => {
                 logoutBtn.classList.remove('view-none')
                 usernameBtn.classList.remove('view-none')
                 usernameBtn.textContent = userInput.value
-                //in case we got error message that says "sign in"
+                //error message that says "sign in" in the main page should disappear in case there is one
                 if(!displayErrorMessage.classList.contains('view-none')) {
                     displayErrorMessage.classList.add('view-none')
                 }
@@ -104,7 +104,7 @@ signupBtn.addEventListener('click', () => {
     pwdInputRepeat.setAttribute('type', 'password')
     pwdInputRepeat.setAttribute('class', 'form-inputs btn btn-white')
     pwdInputRepeat.setAttribute('id', 'signup-pwd-repeat')
-    pwdInputRepeat.setAttribute('placeholder', 'Password...')
+    pwdInputRepeat.setAttribute('placeholder', 'Verify Password...')
 
     let signupFormBtn = document.createElement('button')
     signupFormBtn.setAttribute('class', 'btn btn-white btn-submit')
@@ -123,6 +123,7 @@ signupBtn.addEventListener('click', () => {
     form.setAttribute('class', 'forms')
     form.appendChild(userInput)
     form.appendChild(pwdInput)
+    form.appendChild(pwdInputRepeat)
     form.appendChild(signupFormBtn)
     form.appendChild(closeBtn)
 
@@ -132,34 +133,32 @@ signupBtn.addEventListener('click', () => {
 
     //store signup
     signupAcc = () => {
-        if(!userInput.value || !pwdInput.value) {
-            if(form.contains(document.getElementById('errorID'))) {
-                form.removeChild(form.lastChild)
-            }
+        if(form.contains(document.getElementById('errorID'))) {//clear previous error message
+            form.removeChild(form.lastChild)
+        }
+
+        if(!userInput.value || !pwdInput.value || !pwdInputRepeat.value) {//empty fields
             form.appendChild(setErrorMessage(`All fields are required`))
         }
-        else if(!localStorage.getItem(userInput.value)) {
+        else if(pwdInput.value != pwdInputRepeat.value) {
+            form.appendChild(setErrorMessage(`Password Does not match`))
+        }
+        else if(localStorage.getItem(userInput.value)) {//username exists before, so it is taken
+            form.appendChild(setErrorMessage(`Username ${userInput.value} is taken`))
+        }else {//sign up and store in the localStorage
             localStorage.setItem(userInput.value, pwdInput.value)
             loginBtn.classList.add('view-none')
             signupBtn.classList.add('view-none')
             logoutBtn.classList.remove('view-none')
             usernameBtn.classList.remove('view-none')
             usernameBtn.textContent = userInput.value
-            //in case we got error message that says "sign in"
+            //error message that says "sign in" in the main page should disappear in case there is one
             if(!displayErrorMessage.classList.contains('view-none')) {
                 displayErrorMessage.classList.add('view-none')
             }
             getUserIP()
             closeWindow()
-        }else {
-            if(form.contains(document.getElementById('errorID'))) {
-                // console.log(form.lastChild)
-                // console.log(errorSection)
-                form.removeChild(form.lastChild)
-            }
-            form.appendChild(setErrorMessage(`Username ${userInput.value} is taken`))
         }
-        
     }
 })
 
@@ -171,10 +170,6 @@ logoutBtn.addEventListener('click', () => {
     let ip = document.getElementById('ip')
     ip.remove()
 })
-
-function closeWindow() {
-    document.querySelector('.window').remove()
-}
 
 inputName.addEventListener('input', () => {
     // if there was previous error
@@ -298,31 +293,29 @@ async function randomDogImage() {
     dogImage.appendChild(dogPhoto)
 }
 
-var getUserIP = () => {
+const getUserIP = () => {
     axios.get('https://api.ipify.org/?format=json')
-    .then(response => {
-     const users = response.data
-     const ip = users['ip']
-     const h4 = document.createElement('h4')
-     h4.setAttribute('id', 'ip')
-     h4.setAttribute('class', 'ip-title')
-     h4.textContent = ip
-     navbarTitle.appendChild(h4)
-     console.log(`GET users`, users)
-   })
-    .catch(error => console.error(error))
-   }
+        .then(response => {
+        const users = response.data
+        const ip = users['ip']
+        const h4 = document.createElement('h4')
+        h4.setAttribute('id', 'ip')
+        h4.setAttribute('class', 'ip-title')
+        h4.textContent = ip
+        navbarTitle.appendChild(h4)
+    })
+        .catch(error => console.error(error))
+}
 
-   const randomActivity = () => {
+const randomActivity = () => {
     axios.get('https://www.boredapi.com/api/activity')
-    .then(response => {
-     const users = response.data;
-     const randomActivity = document.getElementById('random-activity')
-     randomActivity.textContent = users.activity
-     //console.log(`GET users`, users);
-   })
-    .catch(error => console.error(error));
-   };
+        .then(response => {
+            const users = response.data
+            const randomActivity = document.getElementById('random-activity')
+            randomActivity.textContent = users.activity
+        })
+        .catch(error => console.error(error))
+}
    
 
 function clear() {
@@ -347,4 +340,8 @@ function setErrorMessage(message) {
     errorText.textContent = message
     errorSection.appendChild(errorText)
     return errorSection
+}
+
+function closeWindow() {
+    document.querySelector('.window').remove()
 }
