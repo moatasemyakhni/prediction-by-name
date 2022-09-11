@@ -13,6 +13,7 @@ const signupBtn = document.getElementById('signup-btn')
 const logoutBtn = document.getElementById('logout-btn')
 const usernameBtn = document.getElementById('username-btn')
 const navbarTitle = document.getElementById('navbar-title')
+const randomActivityBtn = document.getElementById('random-activity-btn')
 
 loginBtn.addEventListener('click', () => {
     console.log("login")
@@ -238,6 +239,10 @@ submitDogBtn.addEventListener('click', () => {
     randomDogImage()
 })
 
+randomActivityBtn.addEventListener('click', () => {
+    randomActivity();
+})
+
 async function genderPredictionByName() {
     const response = await fetch('https://api.genderize.io?name=' + inputName.value)
     if(!response.ok) {
@@ -322,15 +327,16 @@ var getUserIP = () => {
     .catch(error => console.error(error))
    }
 
-   const getUsers = () => {
+   const randomActivity = () => {
     axios.get('https://www.boredapi.com/api/activity')
     .then(response => {
      const users = response.data;
-     console.log(`GET users`, users);
+     const randomActivity = document.getElementById('random-activity')
+     randomActivity.textContent = users.activity
+     //console.log(`GET users`, users);
    })
     .catch(error => console.error(error));
    };
-   getUsers();
    
 
 function clear() {
