@@ -10,10 +10,11 @@ const submitDogBtn = document.getElementById('dog-btn')
 let dogImage = document.getElementById('dog-image')
 const loginBtn = document.getElementById('login-btn')
 const signupBtn = document.getElementById('signup-btn')
-
+const logoutBtn = document.getElementById('logout-btn')
+const usernameBtn = document.getElementById('username-btn')
 
 loginBtn.addEventListener('click', () => {
-    console.log("HEllo")
+    console.log("login")
     let body = document.body
     let div = document.createElement('div')
     div.setAttribute('class', 'window')
@@ -28,9 +29,10 @@ loginBtn.addEventListener('click', () => {
     pwdInput.setAttribute('class', 'form-inputs btn btn-white')
     pwdInput.setAttribute('id', 'login-pwd')
     pwdInput.setAttribute('placeholder', 'Password...')
-    let loginFormBtn = document.createElement('button')
+    var loginFormBtn = document.createElement('button')
     loginFormBtn.setAttribute('class', 'btn btn-white btn-submit')
     loginFormBtn.setAttribute('id', 'login-form-btn')
+    loginFormBtn.setAttribute('onclick', 'loginAcc()')
     loginFormBtn.textContent = 'Login'
 
     let form = document.createElement('div')
@@ -50,11 +52,19 @@ loginBtn.addEventListener('click', () => {
     body.appendChild(div)
     closeBtn.setAttribute("onclick", "closeWindow()");
 
-    let login = document.getElementById('login-form-btn')
+    //login
+
+    loginAcc = () => {
+        console.log('inner login')
+        let pwd = localStorage.getItem(userInput.value)
+        if(pwd == pwdInput.value) {
+            console.log('correct user!')
+        }
+    }
 })
 
 signupBtn.addEventListener('click', () => {
-    console.log("HEllo")
+    console.log("signup")
     let body = document.body
     let div = document.createElement('div')
     div.setAttribute('class', 'window')
@@ -72,8 +82,8 @@ signupBtn.addEventListener('click', () => {
     let signupFormBtn = document.createElement('button')
     signupFormBtn.setAttribute('class', 'btn btn-white btn-submit')
     signupFormBtn.setAttribute('id', 'signup-form-btn')
+    signupFormBtn.setAttribute('onclick', 'signupAcc()')
     signupFormBtn.textContent = 'Signup'
-
     let form = document.createElement('div')
     let closeBtn = document.createElement('button')
     closeBtn.setAttribute('class', 'btn btn-submit btn-white')
@@ -89,30 +99,41 @@ signupBtn.addEventListener('click', () => {
 
     div.appendChild(form)
     body.appendChild(div)
-    closeBtn.setAttribute("onclick", "closeWindow()");
+    closeBtn.setAttribute("onclick", "closeWindow()")
 
-    
-
-})
-// 
     //store signup
-    let signup = document.getElementById('signup-form-btn')
-    signup.addEventListener('click', () => {
-        let signupPwd = document.getElementById('signup-pwd').value
-        let signupUser = document.getElementById('signup-user').value
-        localStorage.setItem(signupUser, signupPwd)
-    })
-    //login
-    let login = document.getElementById('login-form-btn')
-    login.addEventListener('click', () => {
-        let loginPwd = document.getElementById('login-pwd').value
-        let loginUser = document.getElementById('login-user').value
-        let pwd = localStorage.getItem(loginUser)
-        if(pwd == loginPwd) {
-            console.log('correct user!')
+    signupAcc = () => {
+        console.log('inner signup')
+        if(!localStorage.getItem(userInput.value)) {
+            localStorage.setItem(userInput.value, pwdInput.value)
+            loginBtn.classList.add('view-none')
+            signupBtn.classList.add('view-none')
+            logoutBtn.classList.remove('view-none')
+            usernameBtn.classList.remove('view-none')
+            usernameBtn.textContent = userInput.value
+            closeWindow()
+        }else {
+            console.log("No signup")
+            const errorSection = document.createElement('div')
+            errorSection.setAttribute('class', 'section section-error')
+            let errorText = document.createElement('p')
+            errorText.setAttribute('class', 'error-msg')
+            errorText.style.color = '#f1f1f1'
+            errorText.style.textAlign = 'center'
+            errorText.textContent = `Username ${userInput.value} is taken`
+            errorSection.appendChild(errorText)
+            form.appendChild(errorSection)
         }
-    })
-// 
+        
+    }
+})
+
+logoutBtn.addEventListener('click', () => {
+    logoutBtn.classList.add('view-none')
+    usernameBtn.classList.add('view-none')
+    loginBtn.classList.remove('view-none')
+    signupBtn.classList.remove('view-none')
+})
 
 function closeWindow() {
     document.querySelector('.window').remove()
