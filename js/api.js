@@ -148,6 +148,11 @@ inputName.addEventListener('input', () => {
 })
 
 submitNameBtn.addEventListener('click', () => {
+    if(usernameBtn.classList.contains('view-none')) {
+        errorMessage.textContent = "Sign in first"
+        displayErrorMessage.classList.remove('view-none')
+        return
+    }
     clear() // old info should be cleared
     // handle empty field
     if(!inputName.value) {
