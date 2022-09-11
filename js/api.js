@@ -49,6 +49,8 @@ loginBtn.addEventListener('click', () => {
     div.appendChild(form)
     body.appendChild(div)
     closeBtn.setAttribute("onclick", "closeWindow()");
+
+    let login = document.getElementById('login-form-btn')
 })
 
 signupBtn.addEventListener('click', () => {
@@ -59,13 +61,13 @@ signupBtn.addEventListener('click', () => {
     let userInput = document.createElement('input')
     userInput.setAttribute('type', 'text')
     userInput.setAttribute('class', 'form-inputs btn btn-white')
-    userInput.setAttribute('id', 'login-name')
+    userInput.setAttribute('id', 'signup-name')
     userInput.setAttribute('placeholder', 'Username...')
     
     let pwdInput = document.createElement('input')
     pwdInput.setAttribute('type', 'password')
     pwdInput.setAttribute('class', 'form-inputs btn btn-white')
-    pwdInput.setAttribute('id', 'login-pwd')
+    pwdInput.setAttribute('id', 'signup-pwd')
     pwdInput.setAttribute('placeholder', 'Password...')
     let signupFormBtn = document.createElement('button')
     signupFormBtn.setAttribute('class', 'btn btn-white btn-submit')
@@ -88,7 +90,29 @@ signupBtn.addEventListener('click', () => {
     div.appendChild(form)
     body.appendChild(div)
     closeBtn.setAttribute("onclick", "closeWindow()");
+
+    
+
 })
+// 
+    //store signup
+    let signup = document.getElementById('signup-form-btn')
+    signup.addEventListener('click', () => {
+        let signupPwd = document.getElementById('signup-pwd').value
+        let signupUser = document.getElementById('signup-user').value
+        localStorage.setItem(signupUser, signupPwd)
+    })
+    //login
+    let login = document.getElementById('login-form-btn')
+    login.addEventListener('click', () => {
+        let loginPwd = document.getElementById('signup-pwd').value
+        let loginUser = document.getElementById('signup-user').value
+        let pwd = localStorage.getItem(signupUser)
+        if(pwd == loginPwd) {
+            console.log('correct user!')
+        }
+    })
+// 
 
 function closeWindow() {
     document.querySelector('.window').remove()
