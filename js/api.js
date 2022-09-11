@@ -86,6 +86,7 @@ loginBtn.addEventListener('click', () => {
                 logoutBtn.classList.remove('view-none')
                 usernameBtn.classList.remove('view-none')
                 usernameBtn.textContent = userInput.value
+                getUserIP()
                 closeWindow()
             }
         }
@@ -157,6 +158,7 @@ signupBtn.addEventListener('click', () => {
             logoutBtn.classList.remove('view-none')
             usernameBtn.classList.remove('view-none')
             usernameBtn.textContent = userInput.value
+            getUserIP()
             closeWindow()
         }else {
             console.log("No signup")
@@ -185,6 +187,8 @@ logoutBtn.addEventListener('click', () => {
     usernameBtn.classList.add('view-none')
     loginBtn.classList.remove('view-none')
     signupBtn.classList.remove('view-none')
+    let ip = document.getElementById('ip')
+    ip.remove()
 })
 
 function closeWindow() {
@@ -303,7 +307,7 @@ async function randomDogImage() {
     dogPhoto.setAttribute('src', data.message)
 }
 
-const getUserIP = () => {
+var getUserIP = () => {
     axios.get('https://api.ipify.org/?format=json')
     .then(response => {
      const users = response.data
@@ -318,7 +322,6 @@ const getUserIP = () => {
     .catch(error => console.error(error))
    }
    
-getUserIP()
 
 function clear() {
     gender.textContent = null
