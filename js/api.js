@@ -16,10 +16,8 @@ const navbarTitle = document.getElementById('navbar-title')
 const randomActivityBtn = document.getElementById('random-activity-btn')
 
 loginBtn.addEventListener('click', () => {
-    console.log("login")
     let body = document.body
     let div = document.createElement('div')
-    div.setAttribute('class', 'window')
     let userInput = document.createElement('input')
     userInput.setAttribute('type', 'text')
     userInput.setAttribute('class', 'form-inputs btn btn-white')
@@ -31,56 +29,44 @@ loginBtn.addEventListener('click', () => {
     pwdInput.setAttribute('class', 'form-inputs btn btn-white')
     pwdInput.setAttribute('id', 'login-pwd')
     pwdInput.setAttribute('placeholder', 'Password...')
+    
     var loginFormBtn = document.createElement('button')
     loginFormBtn.setAttribute('class', 'btn btn-white btn-submit')
     loginFormBtn.setAttribute('id', 'login-form-btn')
     loginFormBtn.setAttribute('onclick', 'loginAcc()')
     loginFormBtn.textContent = 'Login'
 
-    let form = document.createElement('div')
     let closeBtn = document.createElement('button')
     closeBtn.setAttribute('class', 'btn btn-submit btn-white')
+    closeBtn.setAttribute("onclick", "closeWindow()");
     closeBtn.style.backgroundColor = 'rgb(200, 0, 0)'
     closeBtn.style.color = "#f1f1f1"
     closeBtn.textContent = "Close"
 
+    let form = document.createElement('div')
     form.setAttribute('class', 'forms')
     form.appendChild(userInput)
     form.appendChild(pwdInput)
     form.appendChild(loginFormBtn)
     form.appendChild(closeBtn)
 
+    div.setAttribute('class', 'window')
     div.appendChild(form)
+
     body.appendChild(div)
-    closeBtn.setAttribute("onclick", "closeWindow()");
 
     //login
-
     loginAcc = () => {
-        console.log('inner login')
         let pwd = localStorage.getItem(userInput.value)
-        const errorSection = document.createElement('div')
-        errorSection.setAttribute('class', 'section section-error')
-        errorSection.setAttribute('id', 'errorID')
-        let errorText = document.createElement('p')
-        errorText.setAttribute('class', 'error-msg')
-        errorText.style.color = '#f1f1f1'
-        errorText.style.textAlign = 'center'
         if(form.contains(document.getElementById('errorID'))) {
-            // console.log(form.lastChild)
-            // console.log(errorSection)
+            //avoid multiple error messages
             form.removeChild(form.lastChild)
         }
         if(!pwd) {
-            errorText.textContent = `Username ${userInput.value} is not found`
-            errorSection.appendChild(errorText)
-            form.appendChild(errorSection)
+            form.appendChild(setErrorMessage(`Username ${userInput.value} is not found`))
         }else {
             if(pwd != pwdInput.value) {
-                console.log('incorrect user!')
-                errorText.textContent = `Wrong username or password`
-                errorSection.appendChild(errorText)
-                form.appendChild(errorSection)
+                form.appendChild(setErrorMessage(`Wrong username or password`))
             }else {
                 loginBtn.classList.add('view-none')
                 signupBtn.classList.add('view-none')
@@ -95,10 +81,9 @@ loginBtn.addEventListener('click', () => {
 })
 
 signupBtn.addEventListener('click', () => {
-    console.log("signup")
     let body = document.body
     let div = document.createElement('div')
-    div.setAttribute('class', 'window')
+
     let userInput = document.createElement('input')
     userInput.setAttribute('type', 'text')
     userInput.setAttribute('class', 'form-inputs btn btn-white')
@@ -110,47 +95,38 @@ signupBtn.addEventListener('click', () => {
     pwdInput.setAttribute('class', 'form-inputs btn btn-white')
     pwdInput.setAttribute('id', 'signup-pwd')
     pwdInput.setAttribute('placeholder', 'Password...')
+
     let signupFormBtn = document.createElement('button')
     signupFormBtn.setAttribute('class', 'btn btn-white btn-submit')
     signupFormBtn.setAttribute('id', 'signup-form-btn')
     signupFormBtn.setAttribute('onclick', 'signupAcc()')
     signupFormBtn.textContent = 'Signup'
-    let form = document.createElement('div')
+    
     let closeBtn = document.createElement('button')
     closeBtn.setAttribute('class', 'btn btn-submit btn-white')
+    closeBtn.setAttribute("onclick", "closeWindow()")
     closeBtn.style.backgroundColor = 'rgb(200, 0, 0)'
     closeBtn.style.color = "#f1f1f1"
     closeBtn.textContent = "Close"
 
+    let form = document.createElement('div')
     form.setAttribute('class', 'forms')
     form.appendChild(userInput)
     form.appendChild(pwdInput)
     form.appendChild(signupFormBtn)
     form.appendChild(closeBtn)
 
+    div.setAttribute('class', 'window')
     div.appendChild(form)
     body.appendChild(div)
-    closeBtn.setAttribute("onclick", "closeWindow()")
 
     //store signup
     signupAcc = () => {
-        console.log('inner signup')
         if(!userInput.value || !pwdInput.value) {
-            const errorSection = document.createElement('div')
-            errorSection.setAttribute('class', 'section section-error')
-            errorSection.setAttribute('id', 'errorID')
-            let errorText = document.createElement('p')
-            errorText.setAttribute('class', 'error-msg')
-            errorText.style.color = '#f1f1f1'
-            errorText.style.textAlign = 'center'
-            errorText.textContent = `All fields are required`
-            errorSection.appendChild(errorText)
             if(form.contains(document.getElementById('errorID'))) {
-                // console.log(form.lastChild)
-                // console.log(errorSection)
                 form.removeChild(form.lastChild)
             }
-            form.appendChild(errorSection)
+            form.appendChild(setErrorMessage(`All fields are required`))
         }
         else if(!localStorage.getItem(userInput.value)) {
             localStorage.setItem(userInput.value, pwdInput.value)
@@ -162,22 +138,12 @@ signupBtn.addEventListener('click', () => {
             getUserIP()
             closeWindow()
         }else {
-            console.log("No signup")
-            const errorSection = document.createElement('div')
-            errorSection.setAttribute('class', 'section section-error')
-            errorSection.setAttribute('id', 'errorID')
-            let errorText = document.createElement('p')
-            errorText.setAttribute('class', 'error-msg')
-            errorText.style.color = '#f1f1f1'
-            errorText.style.textAlign = 'center'
-            errorText.textContent = `Username ${userInput.value} is taken`
-            errorSection.appendChild(errorText)
             if(form.contains(document.getElementById('errorID'))) {
                 // console.log(form.lastChild)
                 // console.log(errorSection)
                 form.removeChild(form.lastChild)
             }
-            form.appendChild(errorSection)
+            form.appendChild(setErrorMessage(`Username ${userInput.value} is taken`))
         }
         
     }
@@ -348,4 +314,17 @@ function clear() {
     while(nationality.firstChild) {
         nationality.removeChild(nationality.firstChild)
     }
+}
+
+function setErrorMessage(message) {
+    const errorSection = document.createElement('div')
+    errorSection.setAttribute('class', 'section section-error')
+    errorSection.setAttribute('id', 'errorID')
+    let errorText = document.createElement('p')
+    errorText.setAttribute('class', 'error-msg')
+    errorText.style.color = '#f1f1f1'
+    errorText.style.textAlign = 'center'
+    errorText.textContent = message
+    errorSection.appendChild(errorText)
+    return errorSection
 }
