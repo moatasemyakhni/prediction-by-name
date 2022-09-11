@@ -1,13 +1,13 @@
 const inputName = document.getElementById('name')
 const submitNameBtn = document.getElementById('name-btn')
-let displayErrorMessage = document.getElementById('error-section')
-let errorMessage = document.getElementById('error-msg-content')
-let hiddenSections = document.querySelectorAll('.sections-to-view')
+const displayErrorMessage = document.getElementById('error-section')
+const errorMessage = document.getElementById('error-msg-content')
+const hiddenSections = document.querySelectorAll('.sections-to-view')
 const gender = document.getElementById('gender')
 const age = document.getElementById('age')
 const nationality = document.getElementById('nationality')
 const submitDogBtn = document.getElementById('dog-btn')
-let dogImage = document.getElementById('dog-image')
+const dogImage = document.getElementById('dog-image')
 const loginBtn = document.getElementById('login-btn')
 const signupBtn = document.getElementById('signup-btn')
 const logoutBtn = document.getElementById('logout-btn')
@@ -199,6 +199,7 @@ submitNameBtn.addEventListener('click', () => {
 })
 
 submitDogBtn.addEventListener('click', () => {
+    console.log("dog section click")
     if(dogImage.classList.contains('view-hidden')) {
         dogImage.classList.remove('view-hidden')
     }
@@ -273,9 +274,14 @@ async function randomDogImage() {
     }
     const data = await response.json()
     let dogPhoto = document.createElement('img')
-
     dogPhoto.setAttribute('class', 'dog-img')
     dogPhoto.setAttribute('src', data.message)
+    dogPhoto.setAttribute('id', 'random-dog')
+
+    if(dogImage.contains(document.getElementById('random-dog'))) {
+        dogImage.removeChild(dogImage.lastChild)
+    }
+    dogImage.appendChild(dogPhoto)
 }
 
 var getUserIP = () => {

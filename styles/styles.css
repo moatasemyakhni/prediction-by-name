@@ -196,6 +196,10 @@ body {
         flex-direction: column;
     }
 
+    .section-random-activity {
+        margin: 60px auto 0px;
+    }
+
 }
 
 /* utilities */
