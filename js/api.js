@@ -62,17 +62,21 @@ loginBtn.addEventListener('click', () => {
             //avoid multiple error messages
             form.removeChild(form.lastChild)
         }
-        if(!pwd) {
+        if(!pwd) {//field is empty or the username not in the localStorage
             form.appendChild(setErrorMessage(`Username ${userInput.value} is not found`))
         }else {
-            if(pwd != pwdInput.value) {
+            if(pwd != pwdInput.value) {//pwd does not match
                 form.appendChild(setErrorMessage(`Wrong username or password`))
-            }else {
+            }else {//login successfully
                 loginBtn.classList.add('view-none')
                 signupBtn.classList.add('view-none')
                 logoutBtn.classList.remove('view-none')
                 usernameBtn.classList.remove('view-none')
                 usernameBtn.textContent = userInput.value
+                //in case we got error message that says "sign in"
+                if(!displayErrorMessage.classList.contains('view-none')) {
+                    displayErrorMessage.classList.add('view-none')
+                }
                 getUserIP()
                 closeWindow()
             }
@@ -95,6 +99,12 @@ signupBtn.addEventListener('click', () => {
     pwdInput.setAttribute('class', 'form-inputs btn btn-white')
     pwdInput.setAttribute('id', 'signup-pwd')
     pwdInput.setAttribute('placeholder', 'Password...')
+
+    let pwdInputRepeat = document.createElement('input')
+    pwdInputRepeat.setAttribute('type', 'password')
+    pwdInputRepeat.setAttribute('class', 'form-inputs btn btn-white')
+    pwdInputRepeat.setAttribute('id', 'signup-pwd-repeat')
+    pwdInputRepeat.setAttribute('placeholder', 'Password...')
 
     let signupFormBtn = document.createElement('button')
     signupFormBtn.setAttribute('class', 'btn btn-white btn-submit')
@@ -135,6 +145,10 @@ signupBtn.addEventListener('click', () => {
             logoutBtn.classList.remove('view-none')
             usernameBtn.classList.remove('view-none')
             usernameBtn.textContent = userInput.value
+            //in case we got error message that says "sign in"
+            if(!displayErrorMessage.classList.contains('view-none')) {
+                displayErrorMessage.classList.add('view-none')
+            }
             getUserIP()
             closeWindow()
         }else {
