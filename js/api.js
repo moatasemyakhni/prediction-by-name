@@ -321,6 +321,16 @@ var getUserIP = () => {
    })
     .catch(error => console.error(error))
    }
+
+   const getUsers = () => {
+    axios.get('https://www.boredapi.com/api/activity')
+    .then(response => {
+     const users = response.data;
+     console.log(`GET users`, users);
+   })
+    .catch(error => console.error(error));
+   };
+   getUsers();
    
 
 function clear() {
