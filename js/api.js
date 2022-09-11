@@ -57,8 +57,33 @@ loginBtn.addEventListener('click', () => {
     loginAcc = () => {
         console.log('inner login')
         let pwd = localStorage.getItem(userInput.value)
-        if(pwd == pwdInput.value) {
-            console.log('correct user!')
+        const errorSection = document.createElement('div')
+        errorSection.setAttribute('class', 'section section-error')
+        let errorText = document.createElement('p')
+        errorText.setAttribute('class', 'error-msg')
+        errorText.style.color = '#f1f1f1'
+        errorText.style.textAlign = 'center'
+        if(form.contains(errorSection)) {
+            form.removeChild(errorSection)
+        }
+        if(!pwd) {
+            errorText.textContent = `Username ${userInput.value} is not found`
+            errorSection.appendChild(errorText)
+            form.appendChild(errorSection)
+        }else {
+            if(pwd != pwdInput.value) {
+                console.log('incorrect user!')
+                errorText.textContent = `Wrong username or password`
+                errorSection.appendChild(errorText)
+                form.appendChild(errorSection)
+            }else {
+                loginBtn.classList.add('view-none')
+                signupBtn.classList.add('view-none')
+                logoutBtn.classList.remove('view-none')
+                usernameBtn.classList.remove('view-none')
+                usernameBtn.textContent = userInput.value
+                closeWindow()
+            }
         }
     }
 })
@@ -116,12 +141,18 @@ signupBtn.addEventListener('click', () => {
             console.log("No signup")
             const errorSection = document.createElement('div')
             errorSection.setAttribute('class', 'section section-error')
+            errorSection.setAttribute('id', 'errorID')
             let errorText = document.createElement('p')
             errorText.setAttribute('class', 'error-msg')
             errorText.style.color = '#f1f1f1'
             errorText.style.textAlign = 'center'
             errorText.textContent = `Username ${userInput.value} is taken`
             errorSection.appendChild(errorText)
+            if(form.contains(document.getElementById('errorID'))) {
+                console.log(form.lastChild)
+                console.log(errorSection)
+                form.removeChild(form.lastChild)
+            }
             form.appendChild(errorSection)
         }
         
