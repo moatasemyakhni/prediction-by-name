@@ -59,12 +59,15 @@ loginBtn.addEventListener('click', () => {
         let pwd = localStorage.getItem(userInput.value)
         const errorSection = document.createElement('div')
         errorSection.setAttribute('class', 'section section-error')
+        errorSection.setAttribute('id', 'errorID')
         let errorText = document.createElement('p')
         errorText.setAttribute('class', 'error-msg')
         errorText.style.color = '#f1f1f1'
         errorText.style.textAlign = 'center'
-        if(form.contains(errorSection)) {
-            form.removeChild(errorSection)
+        if(form.contains(document.getElementById('errorID'))) {
+            // console.log(form.lastChild)
+            // console.log(errorSection)
+            form.removeChild(form.lastChild)
         }
         if(!pwd) {
             errorText.textContent = `Username ${userInput.value} is not found`
@@ -149,8 +152,8 @@ signupBtn.addEventListener('click', () => {
             errorText.textContent = `Username ${userInput.value} is taken`
             errorSection.appendChild(errorText)
             if(form.contains(document.getElementById('errorID'))) {
-                console.log(form.lastChild)
-                console.log(errorSection)
+                // console.log(form.lastChild)
+                // console.log(errorSection)
                 form.removeChild(form.lastChild)
             }
             form.appendChild(errorSection)
