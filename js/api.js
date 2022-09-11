@@ -71,7 +71,7 @@ signupBtn.addEventListener('click', () => {
     pwdInput.setAttribute('placeholder', 'Password...')
     let signupFormBtn = document.createElement('button')
     signupFormBtn.setAttribute('class', 'btn btn-white btn-submit')
-    signupFormBtn.setAttribute('id', 'login-form-btn')
+    signupFormBtn.setAttribute('id', 'signup-form-btn')
     signupFormBtn.textContent = 'Signup'
 
     let form = document.createElement('div')
@@ -105,9 +105,9 @@ signupBtn.addEventListener('click', () => {
     //login
     let login = document.getElementById('login-form-btn')
     login.addEventListener('click', () => {
-        let loginPwd = document.getElementById('signup-pwd').value
-        let loginUser = document.getElementById('signup-user').value
-        let pwd = localStorage.getItem(signupUser)
+        let loginPwd = document.getElementById('login-pwd').value
+        let loginUser = document.getElementById('login-user').value
+        let pwd = localStorage.getItem(loginUser)
         if(pwd == loginPwd) {
             console.log('correct user!')
         }
