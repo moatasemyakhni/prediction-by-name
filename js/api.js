@@ -1,22 +1,23 @@
 const inputName = document.getElementById('name')
 const submitNameBtn = document.getElementById('name-btn')
-let displayErrorMessage = document.getElementById('error-section')
-let errorMessage = document.getElementById('error-msg-content')
-let hiddenSections = document.querySelectorAll('.sections-to-view')
+const displayErrorMessage = document.getElementById('error-section')
+const errorMessage = document.getElementById('error-msg-content')
+const hiddenSections = document.querySelectorAll('.sections-to-view')
 const gender = document.getElementById('gender')
 const age = document.getElementById('age')
 const nationality = document.getElementById('nationality')
 const submitDogBtn = document.getElementById('dog-btn')
-let dogImage = document.getElementById('dog-image')
+const dogImage = document.getElementById('dog-image')
 const loginBtn = document.getElementById('login-btn')
 const signupBtn = document.getElementById('signup-btn')
-
+const logoutBtn = document.getElementById('logout-btn')
+const usernameBtn = document.getElementById('username-btn')
+const navbarTitle = document.getElementById('navbar-title')
+const randomActivityBtn = document.getElementById('random-activity-btn')
 
 loginBtn.addEventListener('click', () => {
-    console.log("HEllo")
     let body = document.body
     let div = document.createElement('div')
-    div.setAttribute('class', 'window')
     let userInput = document.createElement('input')
     userInput.setAttribute('type', 'text')
     userInput.setAttribute('class', 'form-inputs btn btn-white')
@@ -28,36 +29,61 @@ loginBtn.addEventListener('click', () => {
     pwdInput.setAttribute('class', 'form-inputs btn btn-white')
     pwdInput.setAttribute('id', 'login-pwd')
     pwdInput.setAttribute('placeholder', 'Password...')
-    let loginFormBtn = document.createElement('button')
+    
+    var loginFormBtn = document.createElement('button')
     loginFormBtn.setAttribute('class', 'btn btn-white btn-submit')
     loginFormBtn.setAttribute('id', 'login-form-btn')
+    loginFormBtn.setAttribute('onclick', 'loginAcc()')
     loginFormBtn.textContent = 'Login'
 
-    let form = document.createElement('div')
     let closeBtn = document.createElement('button')
     closeBtn.setAttribute('class', 'btn btn-submit btn-white')
+    closeBtn.setAttribute("onclick", "closeWindow()");
     closeBtn.style.backgroundColor = 'rgb(200, 0, 0)'
     closeBtn.style.color = "#f1f1f1"
     closeBtn.textContent = "Close"
 
+    let form = document.createElement('div')
     form.setAttribute('class', 'forms')
     form.appendChild(userInput)
     form.appendChild(pwdInput)
     form.appendChild(loginFormBtn)
     form.appendChild(closeBtn)
 
+    div.setAttribute('class', 'window')
     div.appendChild(form)
-    body.appendChild(div)
-    closeBtn.setAttribute("onclick", "closeWindow()");
 
-    let login = document.getElementById('login-form-btn')
+    body.appendChild(div)
+
+    //login
+    loginAcc = () => {
+        let pwd = localStorage.getItem(userInput.value)
+        if(form.contains(document.getElementById('errorID'))) {
+            //avoid multiple error messages
+            form.removeChild(form.lastChild)
+        }
+        if(!pwd) {
+            form.appendChild(setErrorMessage(`Username ${userInput.value} is not found`))
+        }else {
+            if(pwd != pwdInput.value) {
+                form.appendChild(setErrorMessage(`Wrong username or password`))
+            }else {
+                loginBtn.classList.add('view-none')
+                signupBtn.classList.add('view-none')
+                logoutBtn.classList.remove('view-none')
+                usernameBtn.classList.remove('view-none')
+                usernameBtn.textContent = userInput.value
+                getUserIP()
+                closeWindow()
+            }
+        }
+    }
 })
 
 signupBtn.addEventListener('click', () => {
-    console.log("HEllo")
     let body = document.body
     let div = document.createElement('div')
-    div.setAttribute('class', 'window')
+
     let userInput = document.createElement('input')
     userInput.setAttribute('type', 'text')
     userInput.setAttribute('class', 'form-inputs btn btn-white')
@@ -69,50 +95,68 @@ signupBtn.addEventListener('click', () => {
     pwdInput.setAttribute('class', 'form-inputs btn btn-white')
     pwdInput.setAttribute('id', 'signup-pwd')
     pwdInput.setAttribute('placeholder', 'Password...')
+
     let signupFormBtn = document.createElement('button')
     signupFormBtn.setAttribute('class', 'btn btn-white btn-submit')
     signupFormBtn.setAttribute('id', 'signup-form-btn')
+    signupFormBtn.setAttribute('onclick', 'signupAcc()')
     signupFormBtn.textContent = 'Signup'
-
-    let form = document.createElement('div')
+    
     let closeBtn = document.createElement('button')
     closeBtn.setAttribute('class', 'btn btn-submit btn-white')
+    closeBtn.setAttribute("onclick", "closeWindow()")
     closeBtn.style.backgroundColor = 'rgb(200, 0, 0)'
     closeBtn.style.color = "#f1f1f1"
     closeBtn.textContent = "Close"
 
+    let form = document.createElement('div')
     form.setAttribute('class', 'forms')
     form.appendChild(userInput)
     form.appendChild(pwdInput)
     form.appendChild(signupFormBtn)
     form.appendChild(closeBtn)
 
+    div.setAttribute('class', 'window')
     div.appendChild(form)
     body.appendChild(div)
-    closeBtn.setAttribute("onclick", "closeWindow()");
 
-    
-
-})
-// 
     //store signup
-    let signup = document.getElementById('signup-form-btn')
-    signup.addEventListener('click', () => {
-        let signupPwd = document.getElementById('signup-pwd').value
-        let signupUser = document.getElementById('signup-user').value
-        localStorage.setItem(signupUser, signupPwd)
-    })
-    //login
-    let login = document.getElementById('login-form-btn')
-    login.addEventListener('click', () => {
-        let loginPwd = document.getElementById('login-pwd').value
-        let loginUser = document.getElementById('login-user').value
-        let pwd = localStorage.getItem(loginUser)
-        if(pwd == loginPwd) {
-            console.log('correct user!')
+    signupAcc = () => {
+        if(!userInput.value || !pwdInput.value) {
+            if(form.contains(document.getElementById('errorID'))) {
+                form.removeChild(form.lastChild)
+            }
+            form.appendChild(setErrorMessage(`All fields are required`))
         }
-    })
-// 
+        else if(!localStorage.getItem(userInput.value)) {
+            localStorage.setItem(userInput.value, pwdInput.value)
+            loginBtn.classList.add('view-none')
+            signupBtn.classList.add('view-none')
+            logoutBtn.classList.remove('view-none')
+            usernameBtn.classList.remove('view-none')
+            usernameBtn.textContent = userInput.value
+            getUserIP()
+            closeWindow()
+        }else {
+            if(form.contains(document.getElementById('errorID'))) {
+                // console.log(form.lastChild)
+                // console.log(errorSection)
+                form.removeChild(form.lastChild)
+            }
+            form.appendChild(setErrorMessage(`Username ${userInput.value} is taken`))
+        }
+        
+    }
+})
+
+logoutBtn.addEventListener('click', () => {
+    logoutBtn.classList.add('view-none')
+    usernameBtn.classList.add('view-none')
+    loginBtn.classList.remove('view-none')
+    signupBtn.classList.remove('view-none')
+    let ip = document.getElementById('ip')
+    ip.remove()
+})
 
 function closeWindow() {
     document.querySelector('.window').remove()
@@ -127,6 +171,11 @@ inputName.addEventListener('input', () => {
 })
 
 submitNameBtn.addEventListener('click', () => {
+    if(usernameBtn.classList.contains('view-none')) {
+        errorMessage.textContent = "Sign in first"
+        displayErrorMessage.classList.remove('view-none')
+        return
+    }
     clear() // old info should be cleared
     // handle empty field
     if(!inputName.value) {
@@ -150,10 +199,15 @@ submitNameBtn.addEventListener('click', () => {
 })
 
 submitDogBtn.addEventListener('click', () => {
+    console.log("dog section click")
     if(dogImage.classList.contains('view-hidden')) {
         dogImage.classList.remove('view-hidden')
     }
     randomDogImage()
+})
+
+randomActivityBtn.addEventListener('click', () => {
+    randomActivity();
 })
 
 async function genderPredictionByName() {
@@ -220,10 +274,42 @@ async function randomDogImage() {
     }
     const data = await response.json()
     let dogPhoto = document.createElement('img')
-
     dogPhoto.setAttribute('class', 'dog-img')
     dogPhoto.setAttribute('src', data.message)
+    dogPhoto.setAttribute('id', 'random-dog')
+
+    if(dogImage.contains(document.getElementById('random-dog'))) {
+        dogImage.removeChild(dogImage.lastChild)
+    }
+    dogImage.appendChild(dogPhoto)
 }
+
+var getUserIP = () => {
+    axios.get('https://api.ipify.org/?format=json')
+    .then(response => {
+     const users = response.data
+     const ip = users['ip']
+     const h4 = document.createElement('h4')
+     h4.setAttribute('id', 'ip')
+     h4.setAttribute('class', 'ip-title')
+     h4.textContent = ip
+     navbarTitle.appendChild(h4)
+     console.log(`GET users`, users)
+   })
+    .catch(error => console.error(error))
+   }
+
+   const randomActivity = () => {
+    axios.get('https://www.boredapi.com/api/activity')
+    .then(response => {
+     const users = response.data;
+     const randomActivity = document.getElementById('random-activity')
+     randomActivity.textContent = users.activity
+     //console.log(`GET users`, users);
+   })
+    .catch(error => console.error(error));
+   };
+   
 
 function clear() {
     gender.textContent = null
@@ -234,4 +320,17 @@ function clear() {
     while(nationality.firstChild) {
         nationality.removeChild(nationality.firstChild)
     }
+}
+
+function setErrorMessage(message) {
+    const errorSection = document.createElement('div')
+    errorSection.setAttribute('class', 'section section-error')
+    errorSection.setAttribute('id', 'errorID')
+    let errorText = document.createElement('p')
+    errorText.setAttribute('class', 'error-msg')
+    errorText.style.color = '#f1f1f1'
+    errorText.style.textAlign = 'center'
+    errorText.textContent = message
+    errorSection.appendChild(errorText)
+    return errorSection
 }

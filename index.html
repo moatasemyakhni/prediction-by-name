@@ -6,16 +6,23 @@
     <title>JS API</title>
     <link rel="stylesheet" href="styles/styles.css">
     <script src="js/api.js" defer></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
     <nav class="navbar">
-        <h1 class="navbar-title">
+        <h1 class="navbar-title" id="navbar-title">
             Name: An Identity Marker
         </h1>
         <div class="login-submit-btns">
             <button class="btn btn-white btn-submit" id="login-btn">Login</button>
             <button class="btn btn-submit btn-reverse" id="signup-btn">
                 SignUp
+            </button>
+            <button class="btn btn-white view-none" id="username-btn">
+                
+            </button> 
+            <button class="btn btn-submit btn-reverse view-none" id="logout-btn">
+                Logout
             </button> 
         </div>
     </nav>
@@ -104,6 +111,13 @@
             <!-- <img alt="Dog Photo" class="dog-img view-hidden" id="dog-image"> -->
         </div>
 
+    </section>
+    <!-- section for random activities suggestion -->
+    <section class="section section-random-activity">
+        <button class="btn btn-white btn-submit" id="random-activity-btn">Random Activity</button>
+        <div>
+            <p id="random-activity"></p>
+        </div>
     </section>
 </body>
 </html>
