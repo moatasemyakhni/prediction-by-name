@@ -132,7 +132,24 @@ signupBtn.addEventListener('click', () => {
     //store signup
     signupAcc = () => {
         console.log('inner signup')
-        if(!localStorage.getItem(userInput.value)) {
+        if(!userInput.value || !pwdInput.value) {
+            const errorSection = document.createElement('div')
+            errorSection.setAttribute('class', 'section section-error')
+            errorSection.setAttribute('id', 'errorID')
+            let errorText = document.createElement('p')
+            errorText.setAttribute('class', 'error-msg')
+            errorText.style.color = '#f1f1f1'
+            errorText.style.textAlign = 'center'
+            errorText.textContent = `All fields are required`
+            errorSection.appendChild(errorText)
+            if(form.contains(document.getElementById('errorID'))) {
+                // console.log(form.lastChild)
+                // console.log(errorSection)
+                form.removeChild(form.lastChild)
+            }
+            form.appendChild(errorSection)
+        }
+        else if(!localStorage.getItem(userInput.value)) {
             localStorage.setItem(userInput.value, pwdInput.value)
             loginBtn.classList.add('view-none')
             signupBtn.classList.add('view-none')
