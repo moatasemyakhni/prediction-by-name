@@ -128,6 +128,27 @@ body {
     justify-content: center;
     gap: 30px;
 }
+/* start random-activity-section */
+.section-random-activity {
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    gap: 10px;
+}
+
+.section-random-activity > div {
+    width: 150px;
+    padding: 10px;
+    min-height: 200px;
+    border-radius: 10px;
+    background-color: var(--main-bg-color);
+}
+
+.section-random-activity > div > p {
+    font-weight: 600;
+    font-size: 18px;
+}
+/* end random-activity-section */
 
 /* media queries */
 @media only screen and (max-width: 600px) {
